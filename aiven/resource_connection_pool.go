@@ -52,7 +52,7 @@ var aivenConnectionPoolSchema = map[string]*schema.Schema{
 	},
 	"username": {
 		Type:        schema.TypeString,
-		Required:    true,
+		Optional:    true,
 		Description: "Name of the service user used to connect to the database",
 	},
 	"connection_uri": {
@@ -91,7 +91,7 @@ func resourceConnectionPoolCreate(ctx context.Context, d *schema.ResourceData, m
 			PoolMode: d.Get("pool_mode").(string),
 			PoolName: poolName,
 			PoolSize: d.Get("pool_size").(int),
-			Username: d.Get("username").(string),
+			Username: optionalStringPointer(d, "username"),
 		},
 	)
 	if err != nil {
@@ -132,7 +132,7 @@ func resourceConnectionPoolUpdate(ctx context.Context, d *schema.ResourceData, m
 			Database: d.Get("database_name").(string),
 			PoolMode: d.Get("pool_mode").(string),
 			PoolSize: d.Get("pool_size").(int),
-			Username: d.Get("username").(string),
+			Username: optionalStringPointer(d, "username"),
 		},
 	)
 	if err != nil {
@@ -142,7 +142,7 @@ func resourceConnectionPoolUpdate(ctx context.Context, d *schema.ResourceData, m
 	return resourceConnectionPoolRead(ctx, d, m)
 }
 
-func resourceConnectionPoolDelete(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
+func resourceConnectionPoolDelete(_ context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
 	client := m.(*aiven.Client)
 
 	projectName, serviceName, poolName := splitResourceID3(d.Id())
