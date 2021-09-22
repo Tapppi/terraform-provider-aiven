@@ -73,6 +73,9 @@ func Provider() *schema.Provider {
 			"aiven_opensearch_acl_config":          datasourceOpensearchACLConfig(),
 			"aiven_opensearch_acl_rule":            datasourceOpensearchACLRule(),
 
+			// flink
+			"aiven_flink": datasourceFlink(),
+
 			// deprecated
 			"aiven_elasticsearch_acl": datasourceElasticsearchACL(),
 		},
@@ -119,6 +122,9 @@ func Provider() *schema.Provider {
 			"aiven_opensearch":                     resourceOpensearch(),
 			"aiven_opensearch_acl_config":          resourceOpensearchACLConfig(),
 			"aiven_opensearch_acl_rule":            resourceOpensearchACLRule(),
+
+			// flink
+			"aiven_flink": resourceFlink(),
 
 			// deprecated
 			"aiven_elasticsearch_acl": resourceElasticsearchACL(),

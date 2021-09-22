@@ -30,6 +30,7 @@ const (
 	ServiceTypeKafkaMirrormaker = "kafka_mirrormaker"
 	ServiceTypeM3               = "m3db"
 	ServiceTypeM3Aggregator     = "m3aggregator"
+	ServiceTypeFlink            = "flink"
 )
 
 func availableServiceTypes() []string {
